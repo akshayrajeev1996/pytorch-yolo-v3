@@ -134,7 +134,7 @@ if __name__ == '__main__':
     FRAME_FPS = cap.get(5)
     FRAME_FOURCC = cap.get(6)
 
-    output_file = 'output.avi'
+    output_file = 'output.mp4'
     out = cv2.VideoWriter(output_file, int(FRAME_FOURCC), FRAME_FPS, (int(FRAME_WIDTH), int(FRAME_HEIGHT)))
     while cap.isOpened():
 
