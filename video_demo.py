@@ -123,7 +123,8 @@ if __name__ == '__main__':
     assert cap.isOpened(), 'Cannot capture source'
     
     frames = 0
-    start = time.time()    
+    start = time.time()
+    out = cv2.VideoWriter('output.mp4', 0x7634706d, 20.0, (640,480))
     while cap.isOpened():
         
         ret, frame = cap.read()
@@ -146,8 +147,6 @@ if __name__ == '__main__':
             if type(output) == int:
                 frames += 1
                 print("FPS of the video is {:5.2f}".format( frames / (time.time() - start)))
-                fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-                out = cv2.VideoWriter('output.mp4', 0x7634706d, 20.0, (640,480))
                 out.write(orig_im)
                 if not dont_show:
                     cv2.imshow("frame", orig_im)
@@ -175,10 +174,7 @@ if __name__ == '__main__':
             colors = pkl.load(open("pallete", "rb"))
             
             list(map(lambda x: write(x, orig_im), output))
-            
-            
-            
-            out = cv2.VideoWriter('output.mp4', 0x7634706d, 20.0, (640,480))
+           
             out.write(orig_im)
             if not dont_show:
                 cv2.imshow("frame", orig_im)
