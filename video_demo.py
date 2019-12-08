@@ -132,7 +132,7 @@ if __name__ == '__main__':
     FRAME_WIDTH = cap.get(3)
     FRAME_HEIGHT = cap.get(4)
     FRAME_FPS = cap.get(5)
-    FRAME_FOURCC = cap.get(6)
+    FRAME_FOURCC = cv2.VideoWriter_fourcc(*"mp4v")
 
     output_file = 'output.mp4'
     out = cv2.VideoWriter(output_file, int(FRAME_FOURCC), FRAME_FPS, (int(FRAME_WIDTH), int(FRAME_HEIGHT)))
