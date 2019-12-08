@@ -1,6 +1,6 @@
 # A PyTorch implementation of a YOLO v3 Object Detector
 
-[UPDATE] : This is a fork of the PyTorch Yolo v3 implementations by Ayoosh Kathooria. Slight modifications have been done to the video_demo.py file for a course project to allow the program to write an output file and run the inference without display.
+[UPDATE] : This is a fork of the PyTorch Yolo v3 implementations by Ayoosh Kathooria. Slight modifications have been done to the video_demo.py file for a course project to allow the program to write an output file and run the inference without display. All references of self hereafter refer to the original author of the code. 
 
 
 This repository contains code for a object detector based on [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf), implementedin PyTorch. The code is based on the official code of [YOLO v3](https://github.com/pjreddie/darknet), as well as a PyTorch 
