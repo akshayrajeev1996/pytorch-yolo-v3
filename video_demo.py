@@ -66,6 +66,9 @@ def arg_parse():
     parser.add_argument("--video", dest = 'video', help = 
                         "Video to run detection upon",
                         default = "video.avi", type = str)
+    parser.add_argument("--dont_show", dest = 'dont_show', help = 
+                        "To show output.",
+                        default = 0, type = str)
     parser.add_argument("--dataset", dest = "dataset", help = "Dataset on which the network has been trained", default = "pascal")
     parser.add_argument("--confidence", dest = "confidence", help = "Object Confidence to filter predictions", default = 0.5)
     parser.add_argument("--nms_thresh", dest = "nms_thresh", help = "NMS Threshhold", default = 0.4)
@@ -85,6 +88,7 @@ if __name__ == '__main__':
     args = arg_parse()
     confidence = float(args.confidence)
     nms_thesh = float(args.nms_thresh)
+    dont_show=bool(args.dont_show)
     start = 0
 
     CUDA = torch.cuda.is_available()
@@ -142,10 +146,14 @@ if __name__ == '__main__':
             if type(output) == int:
                 frames += 1
                 print("FPS of the video is {:5.2f}".format( frames / (time.time() - start)))
-                cv2.imshow("frame", orig_im)
-                key = cv2.waitKey(1)
-                if key & 0xFF == ord('q'):
-                    break
+                fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+                out = cv2.VideoWriter('output.mp4', 0x7634706d, 20.0, (640,480))
+                out.write(orig_im)
+                if not dont_show:
+                    cv2.imshow("frame", orig_im)
+                    key = cv2.waitKey(1)
+                    if key & 0xFF == ord('q'):
+                        break
                 continue
             
             
@@ -169,16 +177,26 @@ if __name__ == '__main__':
             list(map(lambda x: write(x, orig_im), output))
             
             
-            cv2.imshow("frame", orig_im)
-            key = cv2.waitKey(1)
-            if key & 0xFF == ord('q'):
-                break
+            
+            out = cv2.VideoWriter('output.mp4', 0x7634706d, 20.0, (640,480))
+            out.write(orig_im)
+            if not dont_show:
+                cv2.imshow("frame", orig_im)
+                key = cv2.waitKey(1)
+                if key & 0xFF == ord('q'):
+                    break
             frames += 1
             print("FPS of the video is {:5.2f}".format( frames / (time.time() - start)))
 
             
         else:
             break
+    
+
+    
+    
+
+
     
 
     
